@@ -78,7 +78,7 @@ async function login (req, res) {
   res.cookie("jwt_token", jwt_token);
 
   res.status(200).json({
-    Message: "Succesfully Login",
+    Message: "Successfully Login",
   });
 }
 
