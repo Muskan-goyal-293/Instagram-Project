@@ -1,11 +1,12 @@
 const express = require("express")
 const auth = express.Router();
-
+const multer = require("multer");
+const upload = multer({storage : multer.memoryStorage()});
 const {login , register ,privatePublicAccount} = require("../Controllers/authentication.controllers")
 
 // register api
 
-auth.post("/register",register);
+auth.post("/register",upload.single("image"),register);
 
 // Login api
 

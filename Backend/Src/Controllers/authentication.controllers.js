@@ -1,9 +1,27 @@
+// require modules
+
 const userModel = require("../Model/user.model");
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-const  postMiddleware = require("../Middleware/post.middleware")
+const  postMiddleware = require("../Middleware/post.middleware");
+const imageKit = require("@imagekit/nodejs"); 
+const image = new imageKit({
+    privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+})
+
+
+/* @description   this is register function 
+ => check  user already exit  => if  user exit then return
+ => if not exit then register
+*/
 async function register (req, res) {
+   const result = await imageKit.files.upload({
+      file: await toFile(req.file.buffer, req.file.originalname),
+      fileName: req.file.originalname,
+      folder: "Profile_Project_folder",
+    });
+
   const { username, email, password, bio, profile_image } = req.body;
   const isUserExit = await userModel.findOne({
     $or: [{ email }, { username }],
@@ -16,13 +34,12 @@ async function register (req, res) {
   }
 
   let hash = crypto.createHash("sha256").update(password).digest("hex");
-
   const user = await userModel.create({
     username,
     password: hash,
     email,
     bio,
-    profile_image,
+    profile_image :result.url,
     isPrivate
   });
 
@@ -41,9 +58,10 @@ async function register (req, res) {
   });
 }
 
-
-
-// login function
+/* login function
+check user is register or not  if register then enter email , name password and login
+=> if information is wrong then exit
+*/
 
 async function login (req, res) {
   const { username, password, email } = req.body;
@@ -82,11 +100,12 @@ async function login (req, res) {
   });
 }
 
-// privatePublicAccount
+/* privatePublicAccount
+change account to private or public  
+*/
 
 async function privatePublicAccount(req,res){
 const id = req.user.id;
-
 const isExit = await userModel.findById(id);
 if(!isExit){
   return res.status(401).json({
@@ -109,8 +128,8 @@ const updateUserProfile = await userModel.findByIdAndUpdate(id,{
 return res.status(200).json({
   "message" : "user account update"
 })
-
 }
+
 
 
 module.exports ={register , login ,privatePublicAccount}
