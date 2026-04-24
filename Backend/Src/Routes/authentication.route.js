@@ -1,7 +1,7 @@
 const express = require("express")
 const auth = express.Router();
 
-const {login , register} = require("../Controllers/autantication.controllers")
+const {login , register} = require("../Controllers/authentication.controllers")
 
 // register api
 
