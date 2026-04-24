@@ -13,6 +13,12 @@ follower : {
     ref : "usermodel",
     required :[true ,"this filed must be require" ]
  }
+ ,
+ state :{
+    type :String,
+    default : "pending",
+    enum : ["pending" , "rejected" ,"accept"],
+ }
 }, {timestamps: true})
 
 followerSchema.index({follower :1 ,following :1},{unique :true})

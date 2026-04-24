@@ -31,6 +31,10 @@ async function followfunction (req, res) {
         message: "User not found"
       });
     }
+ const reqStatus = "accepted"
+    if(user.isPrivate){
+     reqStatus =  "pending"
+    }
 
     // duplicate follow check
     const existing = await followermodel.findOne({
@@ -46,7 +50,8 @@ async function followfunction (req, res) {
       
     const follow = await followermodel.create({
       follower: decode.id,
-      following: req.params.id
+      following: req.params.id,
+      status  :  reqStatus
     });
 
     res.status(201).json({

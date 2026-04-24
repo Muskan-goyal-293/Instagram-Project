@@ -1,5 +1,5 @@
 //  require modules
-
+const likeModel = require("../Model/like.model");
 const postModel = require("../Model/post.model");
 const { toFile } = require("@imagekit/nodejs");
 const ImageKit = require("@imagekit/nodejs");
@@ -42,4 +42,43 @@ async function Postfatch(req, res) {
   });
 }
 
-module.exports = { postApi, Postfatch };
+
+async function likeFunction(req , res){
+
+  let id = req.user.id;
+  const postId = req.params.id; 
+   
+  const post = postModel.findById(id)
+
+  if(!post){
+    return res.status(404).json({
+      "message" : "post not found enter correct id"
+    })
+  }
+    
+ const isExit = likeModel.findById(req.params.id);
+ if(isExit){
+  return res.status(200).json({
+    "message" : "already like this post"
+  })
+ } 
+
+  const postLike = likeModel.create({
+    user: id,
+    post : post
+  }) 
+
+
+  res.status(200).json({
+    "message" : "like post",
+    likeModel
+  })
+
+
+
+}
+
+
+module.exports = { postApi, Postfatch  , likeFunction};
+
+

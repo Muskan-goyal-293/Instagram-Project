@@ -2,7 +2,7 @@ const userModel = require("../Model/user.model");
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-
+const  postMiddleware = require("../Middleware/post.middleware")
 async function register (req, res) {
   const { username, email, password, bio, profile_image } = req.body;
   const isUserExit = await userModel.findOne({
@@ -23,6 +23,7 @@ async function register (req, res) {
     email,
     bio,
     profile_image,
+    isPrivate
   });
 
   const jwt_token = jwt.sign(
@@ -30,7 +31,6 @@ async function register (req, res) {
       id: user._id,
     },
     process.env.Jwt_Token,
-    {expiresIn : "1d"}
   );
 
   res.cookie("jwt_token", jwt_token);
@@ -72,7 +72,7 @@ async function login (req, res) {
       id: isUserDetailMatch._id,
     },
     process.env.Jwt_Token,
- {expiresIn : "1d"}
+
 );
 
   res.cookie("jwt_token", jwt_token);
@@ -82,5 +82,35 @@ async function login (req, res) {
   });
 }
 
+// privatePublicAccount
 
-module.exports ={register , login}
+async function privatePublicAccount(req,res){
+const id = req.user.id;
+
+const isExit = await userModel.findById(id);
+if(!isExit){
+  return res.status(401).json({
+    "message" : "unauthorized user"
+  })
+}
+const { isPrivate} = req.body;
+
+if(typeof(isPrivate) !== "boolean"){
+  return res.status(401).json({
+    "message" : "type must be true of false"
+  })
+}
+
+
+const updateUserProfile = await userModel.findByIdAndUpdate(id,{
+  isPrivate : isPrivate
+})
+
+return res.status(200).json({
+  "message" : "user account update"
+})
+
+}
+
+
+module.exports ={register , login ,privatePublicAccount}
