@@ -1,29 +1,27 @@
 import { useState } from "react"
 import {Link} from "react-router-dom"
 import "../style/register.scss"
-import axios from "axios"
-
+import { authHookFunction } from "../hook/Authhook";
 
 function Login(){
 
  const [username ,setUserName] = useState("");
  const [password , setPassword] = useState("");
- 
- function loginFunction(e){
+ const {loading ,error ,user ,login } = authHookFunction()
+ async function loginFunction(e){
   e.preventDefault();
+   await login(username , password)
 
-  axios.post("http://localhost:3000/api/login" ,{username,password})
- .then((res)=>{
-    console.log(res)
- })
- .catch((err)=>{
-    console.log(err)
- })
+  setUserName("");
+  setPassword("")
 }
  return(<>  
 
 <main>
 <h1>Login</h1>
+      {error && <p>{error}</p>}
+
+
  <form onSubmit={(e)=>{loginFunction(e)}} >
 <input type="text" placeholder="Enter Your Name /Email" value={username} onChange={(e)=>{
     setUserName(e.target.value)
@@ -32,7 +30,7 @@ function Login(){
     setPassword(e.target.value)
 }} />
 
-<button type="submit">Login</button>
+<button type="submit"> {loading? "loading" : "Login" }</button>
  </form>
 
 <p>if you have no account ? <Link className="link" to="/register">Register</Link></p>

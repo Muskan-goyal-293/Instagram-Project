@@ -1,6 +1,6 @@
 import { Routes , Route } from "react-router-dom";
-import Login from "./feature/auth/Login";
-import Register from "./feature/auth/Register";
+import Login from "./feature/auth/pages/Login";
+import Register from "./feature/auth/pages/Register";
 function Routers(){
     return(<>
      <Routes>
