@@ -1,5 +1,5 @@
 import { useState } from "react"
-import {Link} from "react-router-dom"
+import {Link ,useNavigate} from "react-router-dom"
 import "../style/register.scss"
 import { authHookFunction } from "../hook/Authhook";
 
@@ -8,12 +8,15 @@ function Login(){
  const [username ,setUserName] = useState("");
  const [password , setPassword] = useState("");
  const {loading ,error ,user ,login } = authHookFunction()
+ const navigate = useNavigate()
  async function loginFunction(e){
   e.preventDefault();
    await login(username , password)
 
   setUserName("");
-  setPassword("")
+  setPassword("");
+  navigate("/Post")
+
 }
  return(<>  
 

@@ -67,4 +67,16 @@ async function likeFunction(req, res) {
   });
 }
 
-module.exports = { postApi, PostFetch, likeFunction };
+
+// Get All Post Store In Data Base
+async function getAllPost(req,res) {
+    const allPost =await  postModel.find().populate("user");
+
+    res.status(200).json({
+        "message" : "get all  post ",
+        allPost
+    })
+
+}
+
+module.exports = { postApi, PostFetch, likeFunction,getAllPost };

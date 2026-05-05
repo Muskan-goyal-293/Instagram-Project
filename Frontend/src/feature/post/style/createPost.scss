@@ -1,0 +1,27 @@
+div{
+ 
+    form{
+        display: flex;
+        flex-direction: column;
+        gap:0.6rem;
+        border:  2px solid rgb(213, 77, 250);
+        padding: 1rem;
+        border-radius:  2rem;
+    input{
+        padding: 0.5rem;
+        border-radius: 1rem;
+        outline-color: blue;
+        border: none;
+    }
+    button{
+        background: linear-gradient(to right , rgb(74, 175, 252) ,rgb(86, 58, 243) , rgb(174, 0, 255));
+        padding: 0.5rem;
+        border:  none;
+        color: white;
+        font-weight: 900;
+        border: none;
+        border-radius: 1rem;
+    }
+    
+    }
+}

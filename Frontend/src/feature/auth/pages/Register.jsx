@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 import "../style/register.scss";
 import { useState } from "react";
 import { authHookFunction } from "../hook/Authhook";
@@ -6,13 +6,13 @@ import { authHookFunction } from "../hook/Authhook";
 function Register() {
   // ✅ Hook component ke andar call hota hai
   const { register, loading, error } = authHookFunction();
+const navigate = useNavigate();
 
   // ✅ local state (form ke liye)
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   // ✅ form submit
   async function registerForm(e) {
     e.preventDefault();
@@ -24,6 +24,7 @@ function Register() {
     setEmail("");
     setPassword("");
     setConfirmPassword("");
+   navigate("/Post")
   }
 
   return (
