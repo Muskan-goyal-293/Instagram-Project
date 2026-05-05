@@ -17,8 +17,10 @@ const navigate = useNavigate();
   async function registerForm(e) {
     e.preventDefault();
 
-    // 🔥 hook function call
-    await register(username, email, password, confirmPassword);
+    const success=    await register(username, email, password, confirmPassword);
+  if(!success){
+    return;
+  }
 
     setUserName("");
     setEmail("");

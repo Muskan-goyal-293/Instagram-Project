@@ -19,7 +19,8 @@ const {loading,error,user, setError ,setLoading  ,setUser} = useContext(AuthCont
      setUser(data);
  }
  catch(err){
-     setError(err.message)
+     setError(err.response.data.message);
+     return
     }
     finally{
         setLoading(false)
@@ -33,7 +34,8 @@ const login = async(username , password)=>{
  setUser(data)
 }
  catch(err){
-    setError(err.message)
+    setError(err.response.data.message);
+    return
  }
  finally{
     setLoading(false)

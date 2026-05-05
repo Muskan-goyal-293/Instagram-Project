@@ -11,8 +11,11 @@ function Login(){
  const navigate = useNavigate()
  async function loginFunction(e){
   e.preventDefault();
-   await login(username , password)
+   const success = await login(username , password)
 
+   if(!success){
+    return
+   }
   setUserName("");
   setPassword("");
   navigate("/Post")
@@ -36,7 +39,7 @@ function Login(){
 <button type="submit"> {loading? "loading" : "Login" }</button>
  </form>
 
-<p>if you have no account ? <Link className="link" to="/register">Register</Link></p>
+<p>if you have no account ? <Link className="link" to="/">Register</Link></p>
 </main>
     </>)
 }

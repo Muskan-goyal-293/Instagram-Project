@@ -2,7 +2,7 @@ import { allPostFunction, createPostFunction } from "../api/post.api";
 import { PostContext } from "../services/postState";
 import { useContext } from "react";
 export const AllPostFun = () => {
-  const { loading, setLoading, setAllPost, allPost } = useContext(PostContext);
+  const { loading, setLoading, setAllPost, allPost , response ,setResponse } = useContext(PostContext);
 
   const data = async () => {
     try {
@@ -24,10 +24,10 @@ export const AllPostFun = () => {
 
       setAllPost((prev) => [response.data.post, ...prev]);
     } catch (err) {
-      console.log(err);
-    } finally {
+    setResponse(err.response.data.message)
+     } finally {
       setLoading(false);
     }
   };
-  return { loading, allPost, data, imageCreateFunction };
+  return { loading, allPost, data, imageCreateFunction , response };
 };
