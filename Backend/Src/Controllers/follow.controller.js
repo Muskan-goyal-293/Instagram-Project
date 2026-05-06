@@ -3,7 +3,7 @@ const usermodel = require("../Model/user.model");
 const followermodel = require("../Model/follower.model");
 
 // Follow function
-async function followfunction(req, res) {
+async function followFunction(req, res) {
   try {
     const token = req.cookies.jwt_token;
     if (!token) {
@@ -62,7 +62,7 @@ async function followfunction(req, res) {
 }
 
 // Unfollow user async(req,res) =>{
-async function unfollowfunction(req, res) {
+async function unfollowFunction(req, res) {
   const token = req.cookies.jwt_token;
 
   if (!token) {
@@ -87,4 +87,12 @@ async function unfollowfunction(req, res) {
   res.status(204);
 }
 
-module.exports = { followfunction, unfollowfunction };
+const allUser = async (req,res)=>{
+  const  response = await usermodel.find();
+  res.status(200).json({
+    "message" : "all user get",
+    response
+  })
+}
+
+module.exports = { followFunction, unfollowFunction ,allUser};

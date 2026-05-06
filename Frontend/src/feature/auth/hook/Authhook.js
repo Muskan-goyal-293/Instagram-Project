@@ -17,10 +17,11 @@ const {loading,error,user, setError ,setLoading  ,setUser} = useContext(AuthCont
  try{
      const  data =   await registerApi(username, email,password,confirmPassword) ;
      setUser(data);
+     return true;
  }
  catch(err){
      setError(err.response.data.message);
-     return
+     return false;
     }
     finally{
         setLoading(false)

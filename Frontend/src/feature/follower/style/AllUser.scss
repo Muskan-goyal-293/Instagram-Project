@@ -1,0 +1,30 @@
+
+.outerDiv{
+height: 100%;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+
+.userDiv{
+    border: 2px solid purple;
+    display: flex;
+    border-radius: 1rem;
+    padding:1rem ;
+        align-items: center;
+        justify-content: space-around;
+        gap:1.5rem;
+ 
+ img{
+    height: 7vh;
+    width: 7vh;
+border-radius: 50%;
+}
+button{
+    background: linear-gradient(to left , rgb(101, 101, 248) , rgb(121, 97, 240) , rgb(255, 0, 217)) ;
+    border: none;
+    padding: 0.5rem;
+    color: white;
+    border-radius: 1rem;
+}   }
+}

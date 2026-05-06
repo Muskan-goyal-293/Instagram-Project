@@ -17,6 +17,8 @@ const navigate = useNavigate()
         <div className="postNav">
           <p>Create your on Post</p>
           <button onClick={()=>{navigate("/CreatePost")}} > Create Post</button>
+          <button onClick={()=>{navigate("/Alluser")}} >Explore User</button>
+
         </div>
       <main>
 

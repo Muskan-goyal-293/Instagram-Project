@@ -18,15 +18,16 @@ const navigate = useNavigate();
     e.preventDefault();
 
     const success=    await register(username, email, password, confirmPassword);
+    console.log(success)
   if(!success){
     return;
   }
+  navigate("/Post")
 
     setUserName("");
     setEmail("");
     setPassword("");
     setConfirmPassword("");
-   navigate("/Post")
   }
 
   return (

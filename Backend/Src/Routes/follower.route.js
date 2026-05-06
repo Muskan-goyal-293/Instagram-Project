@@ -1,9 +1,9 @@
 const express = require("express");
 const followRoute = express.Router();
-const {followfunction , unfollowfunction} = require("../Controllers/follow.controller")
+const {followFunction , unfollowFunction, allUser} = require("../Controllers/follow.controller")
 
-followRoute.post("/follow/:id", followfunction );
-followRoute.delete("/delete/:id" , unfollowfunction)
-
+followRoute.post("/follow/:id", followFunction );
+followRoute.delete("/delete/:id" , unfollowFunction)
+followRoute.get("/allUser" , allUser)
 
 module.exports = followRoute;
