@@ -51,11 +51,6 @@ server/
  └── config/
 ```
 
----
-
-## ⚙️ Installation & Setup
-
-
 ## 🔑 Environment Variables
 
 Create a `.env` file in server folder:
@@ -65,23 +60,3 @@ Create a `.env` file in server folder:
 
 This project is built for learning full-stack development using MERN stack.
 
----
-
-## 🙌 Future Improvements
-
-* 💬 Comments feature
-* 🔔 Notifications
-* 📷 Image upload
-* 🧑‍🤝‍🧑 Better user profile system
-
----
-
-## 👩‍💻 Author
-
-Muskan
-
----
-
-## ⭐ Give a Star
-
-If you like this project, please give it a ⭐ on GitHub!
